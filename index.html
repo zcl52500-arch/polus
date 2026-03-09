@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
 
 <meta charset="UTF-8">
@@ -12,200 +13,278 @@
 <style>
 
 :root{
+
 --polus-red:#8A1A24;
 --polus-gold:#B8860B;
+
 }
 
 body{
 margin:0;
 font-family:Inter,sans-serif;
-background:#f6f4f2;
+background:#F4F4F4;
 }
 
+/* header */
+
 .header{
+
 background:white;
+padding:14px 30px;
 border-bottom:1px solid #eee;
-padding:12px 30px;
+
 display:flex;
 justify-content:space-between;
 align-items:center;
+
 }
 
 .logo{
+
 font-family:"Noto Serif SC",serif;
 color:var(--polus-red);
-font-size:18px;
 letter-spacing:2px;
+font-size:18px;
+
 }
 
 .toolbar button{
+
 margin-left:10px;
 background:var(--polus-red);
 color:white;
 border:none;
 padding:8px 14px;
-cursor:pointer;
 border-radius:4px;
+cursor:pointer;
+
 }
 
+/* layout */
+
 .container{
+
 display:flex;
 height:calc(100vh - 60px);
+
 }
 
 .editor{
+
 width:50%;
 padding:25px;
 background:white;
 border-right:1px solid #eee;
+
 }
 
 textarea{
+
 width:100%;
 height:100%;
 border:none;
 outline:none;
+resize:none;
+
 font-size:15px;
 line-height:1.8;
-resize:none;
+
 }
 
 .preview{
+
 width:50%;
 padding:30px;
 overflow:auto;
+
 }
 
 .wechat{
+
 max-width:420px;
 margin:auto;
 background:white;
 padding:35px;
+
 box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
 }
 
 /* brand */
 
 .brand{
+
 text-align:center;
 margin-bottom:30px;
+
 }
 
 .brand h1{
+
 margin:0;
+
 font-family:"Noto Serif SC",serif;
 color:var(--polus-red);
+
 letter-spacing:2px;
+
 }
 
 .brand small{
+
 color:#777;
+
 }
 
 /* title */
 
 .title{
+
 font-family:"Noto Serif SC",serif;
 font-size:28px;
 font-weight:700;
+
 margin:20px 0 10px;
+
 }
 
 .subtitle{
+
 color:#666;
+
 margin-bottom:10px;
+
 }
 
 .meta{
+
 color:#999;
 font-size:13px;
 margin-bottom:20px;
+
 }
 
 /* intro */
 
 .intro{
+
 border-left:4px solid var(--polus-red);
-background:#fafafa;
+background:#FAFAFA;
+
 padding:14px;
+
 margin:20px 0;
+
 }
 
 /* insight */
 
 .insight{
+
 margin-top:30px;
+
 }
 
 .insight-label{
+
 font-size:12px;
+
 color:var(--polus-red);
 letter-spacing:2px;
+
 font-weight:600;
+
 }
 
 .insight-line{
+
 height:2px;
 width:60px;
+
 background:var(--polus-gold);
+
 margin:6px 0;
+
 }
 
 .insight-title{
+
 font-family:"Noto Serif SC",serif;
 font-size:20px;
+
 margin-bottom:10px;
+
 }
 
 /* text */
 
 p{
+
 line-height:1.8;
 color:#333;
+
+margin:15px 0;
+
 }
 
 /* quote */
 
 blockquote{
+
 border-left:3px solid var(--polus-gold);
+
 padding-left:12px;
+
 margin:18px 0;
+
 color:#555;
+
 }
 
 /* divider */
 
 .divider{
+
 text-align:center;
-margin:25px 0;
+margin:30px 0;
+
 }
 
 .divider span{
-display:inline-block;
-width:60px;
-height:2px;
-background:var(--polus-gold);
+
+color:var(--polus-gold);
+font-size:14px;
+
 }
 
 /* image */
 
 .image{
-margin:25px 0;
+
 text-align:center;
+
+margin:25px 0;
+
 }
 
 .image img{
+
 width:100%;
 border-radius:6px;
+
 }
 
 .caption{
+
 font-size:13px;
 color:#888;
+
 margin-top:6px;
+
 }
 
 </style>
+
 </head>
 
 <body>
@@ -241,7 +320,7 @@ $ 2025
 
 !! 在社区剧场的空间里，舞台不只是表演的地方，它也成为公共讨论的现场。
 
-## 谁在清扫落叶？
+## 谁在清扫落叶
 
 社区剧场往往由普通人组成，他们既是观众，也是参与者。
 
@@ -253,7 +332,7 @@ $ 2025
 
 当社区进入舞台，艺术也重新回到生活。
 
-![剧照]
+![社区剧照]
 
 </textarea>
 
@@ -277,10 +356,15 @@ function render(){
 const lines=input.value.split("\n")
 
 let html=`
+
 <div class="brand">
+
 <h1>POLUS</h1>
+
 <small>Educational Foundation</small>
+
 </div>
+
 `
 
 lines.forEach(line=>{
@@ -322,13 +406,17 @@ html+=`
 <div class="insight">
 
 <div class="insight-label">
+
 POLUS INSIGHT
+
 </div>
 
 <div class="insight-line"></div>
 
 <div class="insight-title">
+
 ${line.slice(3)}
+
 </div>
 
 </div>
@@ -345,7 +433,7 @@ html+=`<blockquote>${line.slice(2)}</blockquote>`
 
 else if(line.startsWith("---")){
 
-html+=`<div class="divider"><span></span></div>`
+html+=`<div class="divider"><span>◆</span></div>`
 
 }
 
@@ -412,11 +500,15 @@ $ 日期
 
 正文
 
+> 引用
+
 ---
 
 ## 第二部分
 
 正文
+
+![图片说明]
 `
 
 render()
@@ -426,4 +518,5 @@ render()
 </script>
 
 </body>
+
 </html>
