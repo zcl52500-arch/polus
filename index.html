@@ -3,65 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POLUS 深度内容编辑器 Pro (微信优化版)</title>
+    <title>POLUS 深度内容编辑器 V4.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { margin: 0; font-family: -apple-system, sans-serif; background: #f4f4f7; display: flex; flex-direction: column; height: 100vh; color: #333; }
+        body { margin: 0; font-family: -apple-system, sans-serif; background: #f4f4f7; display: flex; flex-direction: column; height: 100vh; }
         .toolbar { background: #fff; padding: 12px 25px; border-bottom: 1px solid #e0e0e0; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); z-index: 100; }
         .logo { font-family: 'Noto Serif SC', serif; font-weight: 700; color: #8A1A24; font-size: 18px; letter-spacing: 1px; }
-        .btn-copy { background: #8A1A24; color: white; border: none; padding: 9px 20px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px; transition: all 0.2s; }
-        .btn-copy:hover { background: #6a141b; }
+        .btn-copy { background: #8A1A24; color: white; border: none; padding: 9px 20px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px; }
         .main-container { display: flex; flex: 1; overflow: hidden; }
         .editor-container { flex: 1; padding: 25px; background: #fff; border-right: 1px solid #eee; display: flex; flex-direction: column; }
-        textarea { flex: 1; width: 100%; border: none; outline: none; font-size: 14px; line-height: 1.7; color: #444; resize: none; font-family: 'Menlo', 'Monaco', 'Courier New', monospace; }
+        textarea { flex: 1; width: 100%; border: none; outline: none; font-size: 14px; line-height: 1.7; color: #444; resize: none; font-family: 'Menlo', monospace; }
         .preview-container { flex: 1.2; padding: 40px; overflow-y: auto; background: #f0f0f2; display: flex; justify-content: center; }
         #article-wrapper { width: 100%; max-width: 500px; background: white; padding: 40px 25px; min-height: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.08); box-sizing: border-box; }
-        .syntax-hint-box { background: #fafafa; padding: 15px; border-top: 1px solid #eee; font-size: 12px; color: #666; line-height: 1.8; }
-        .syntax-hint-box b { color: #8A1A24; }
-        .syntax-tag { background: #f0f0f0; padding: 0 4px; border-radius: 3px; font-family: monospace; color: #333; }
+        .syntax-hint-box { background: #fafafa; padding: 15px; border-top: 1px solid #eee; font-size: 11px; color: #666; line-height: 1.6; }
+        .syntax-tag { background: #eee; padding: 0 3px; border-radius: 3px; color: #8A1A24; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="toolbar">
-    <div class="logo">POLUS Editor <span style="font-weight: 400; font-size: 11px; color: #999;">WECHAT-COMPATIBLE</span></div>
-    <button class="btn-copy" onclick="copyToWechat()">一键复制到公众号</button>
+    <div class="logo">POLUS Editor <span style="font-weight: 400; font-size: 11px; color: #999;">PRO V4.0</span></div>
+    <button class="btn-copy" onclick="copyToWechat()">复制到公众号</button>
 </div>
 
 <div class="main-container">
     <div class="editor-container">
 <textarea id="editor" placeholder="在此输入内容...">
-# 赋能教育新未来
-@ HOPE Academy / 草莓
+# 应用戏剧如何赋能老师翻转课堂？
+@ 标榜教育基金会 / 2026.03.11
 
-!! 教育不是灌满一桶水，而是点燃一团火。
+!! 人的日常经验，是意识觉醒的起点。往往有效、有力量的成长，就是从我们每日身处其中、却习习惯的经验出发。
 
-## 01 项目背景
-我们关注职校生的职场认知与情感支持。
+## 01 翻转课堂的真相
+在剧场中看见教育中的复杂关系与困境。
 
-### 应用戏剧的介入
-戏剧让表达变得安全。
+== Part 1: 无声的呐喊
+形象剧场中的“系统性压力”。
 
-![学生在工作坊中的互动](https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800)
+### 角色认知的重塑
+通过雕塑的方式，呈现他们在不同岗位上体验到的教学现实。
 
->> 真正的改变发生在每一个对话的瞬间。
+![老师们在体验戏剧工作坊的现场](https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800)
 
-[] 重点：项目已覆盖 200+ 实习生。
+>> 教育不是灌满一桶水，而是点燃一团火。
 
----
-坚持做正确的事。</textarea>
+[] 重点项目：标榜教育基金会“实践陪伴”系列工作坊持续推进中。</textarea>
         <div class="syntax-hint-box">
-            <div style="font-weight: bold; margin-bottom: 5px;">全语法参考：</div>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px;">
-                <div><span class="syntax-tag">#</span> 主标题 | <span class="syntax-tag">@</span> 副标题</div>
+                <div><span class="syntax-tag">#</span> 主标题 | <span class="syntax-tag">##</span> 一级标题</div>
+                <div><span class="syntax-tag">==</span> 模块标题 (新增) | <span class="syntax-tag">###</span> 二级标题</div>
                 <div><span class="syntax-tag">!!</span> 导语框 | <span class="syntax-tag">[]</span> 卡片</div>
-                <div><span class="syntax-tag">##</span> 一级标题 | <span class="syntax-tag">###</span> 二级标题</div>
-                <div><span class="syntax-tag">>></span> 金句高亮 | <span class="syntax-tag">---</span> 分隔线</div>
-                <div><span class="syntax-tag">![注](URL)</span> 图片及图注</div>
+                <div><span class="syntax-tag">>></span> 金句高亮 | <span class="syntax-tag">![图注](URL)</span> 图片</div>
             </div>
         </div>
     </div>
-
     <div class="preview-container">
         <div id="article-wrapper"></div>
     </div>
@@ -77,75 +72,66 @@
         let html = '';
         let sectionCount = 0;
 
-        // 品牌 Header - 全部使用 Inline Style 确保微信识别
         const header = `
             <section style="text-align: center; margin: 20px 0 50px;">
                 <p style="font-size: 34px; font-weight: bold; color: #8A1A24; letter-spacing: 8px; margin: 0; font-family: serif;">POLUS</p>
-                <p style="font-size: 10px; color: #B8860B; letter-spacing: 3px; margin: 5px 0 0; font-weight: bold; text-transform: uppercase;">Educational Foundation</p>
-                <section style="width: 25px; height: 1px; background: #8A1A24; margin: 15px auto;"></section>
-            </section>
-        `;
+                <p style="font-size: 10px; color: #B8860B; letter-spacing: 3px; margin: 5px 0 0; font-weight: bold;">EDUCATIONAL FOUNDATION</p>
+                <section style="width: 25px; height: 1.5px; background-color: #8A1A24; margin: 18px auto;"></section>
+            </section>`;
 
         lines.forEach(line => {
             const trimmed = line.trim();
             if (!trimmed) return;
 
             if (trimmed.startsWith('# ')) {
-                html += `<h1 style="font-size: 24px; color: #222; text-align: center; margin: 30px 0 10px; font-weight: bold;">${trimmed.replace('# ', '')}</h1>`;
+                html += `<h1 style="font-size: 25px; color: #222; text-align: center; margin: 30px 0 10px; font-weight: bold; line-height: 1.4;">${trimmed.replace('# ', '')}</h1>`;
             } else if (trimmed.startsWith('@ ')) {
-                html += `<section style="font-size: 13px; color: #888; text-align: center; margin-bottom: 30px;">${trimmed.replace('@ ', '')}</section>`;
+                html += `<section style="font-size: 13px; color: #888; text-align: center; margin-bottom: 35px; letter-spacing: 1px;">${trimmed.replace('@ ', '')}</section>`;
             } else if (trimmed.startsWith('!! ')) {
-                html += `<section style="background-color: #fdf5f6; border-left: 4px solid #8A1A24; padding: 20px; margin: 25px 0; color: #8A1A24; line-height: 1.8; font-size: 15px; text-align: justify;">${trimmed.replace('!! ', '')}</section>`;
-            } else if (trimmed.startsWith('>> ')) {
-                html += `<section style="text-align: center; margin: 40px 0;"><p style="color: #B8860B; font-size: 24px; margin: 0; opacity: 0.5;">“</p><p style="font-size: 18px; color: #8A1A24; font-weight: bold; line-height: 1.6; margin: 0; padding: 0 10px;">${trimmed.replace('>> ', '')}</p><p style="color: #B8860B; font-size: 24px; margin: 0; opacity: 0.5;">”</p></section>`;
-            } else if (trimmed.startsWith('## ')) {
+                html += `<section style="background-color: #fdf5f6; border-left: 4px solid #8A1A24; padding: 22px; margin: 28px 0; color: #8A1A24; line-height: 1.9; font-size: 15px; text-align: justify; letter-spacing: 0.5px;">${trimmed.replace('!! ', '')}</section>`;
+            } 
+            // 新增：模块标题 (==)
+            else if (trimmed.startsWith('== ')) {
+                html += `<section style="margin: 40px 0 20px; background-color: #8A1A24; padding: 8px 15px; display: inline-block;"><p style="font-size: 14px; color: #ffffff; margin: 0; font-weight: bold; letter-spacing: 1px;">${trimmed.replace('== ', '')}</p></section>`;
+            }
+            else if (trimmed.startsWith('## ')) {
                 sectionCount++;
                 const num = sectionCount < 10 ? '0' + sectionCount : sectionCount;
-                html += `<section style="margin: 45px 0 25px;"><p style="font-size: 11px; color: #8A1A24; font-weight: bold; letter-spacing: 2px; margin: 0 0 5px;">CHAPTER ${num}</p><section style="width: 35px; height: 3px; background-color: #B8860B; margin-bottom: 10px;"></section><p style="font-size: 22px; color: #222; margin: 0; font-weight: bold;">${trimmed.replace('## ', '')}</p></section>`;
+                html += `<section style="margin: 50px 0 25px; border-bottom: 1px solid #eee; padding-bottom: 15px;"><p style="font-size: 11px; color: #8A1A24; font-weight: bold; letter-spacing: 2px; margin-bottom: 8px;">CHAPTER ${num}</p><p style="font-size: 22px; color: #222; margin: 0; font-weight: bold; font-family: serif;">${trimmed.replace('## ', '')}</p></section>`;
             } else if (trimmed.startsWith('### ')) {
-                html += `<section style="margin: 30px 0 15px; border-left: 3px solid #8A1A24; padding-left: 12px;"><p style="font-size: 18px; color: #8A1A24; margin: 0; font-weight: bold;">${trimmed.replace('### ', '')}</p></section>`;
+                html += `<section style="margin: 35px 0 15px; border-left: 3px solid #8A1A24; padding-left: 12px;"><p style="font-size: 18px; color: #8A1A24; margin: 0; font-weight: bold; letter-spacing: 0.5px;">${trimmed.replace('### ', '')}</p></section>`;
+            } else if (trimmed.startsWith('>> ')) {
+                html += `<section style="text-align: center; margin: 45px 0;"><p style="color: #B8860B; font-size: 28px; margin: 0; opacity: 0.4; font-family: serif;">“</p><p style="font-size: 18px; color: #8A1A24; font-weight: bold; line-height: 1.7; margin: -10px 0; padding: 0 15px; letter-spacing: 1px;">${trimmed.replace('>> ', '')}</p><p style="color: #B8860B; font-size: 28px; margin: 0; opacity: 0.4; font-family: serif;">”</p></section>`;
             } else if (trimmed.startsWith('[] ')) {
-                html += `<section style="background-color: #f9f9f9; border-top: 3px solid #8A1A24; padding: 20px; margin: 25px 0; font-size: 15px; color: #444; line-height: 1.8; border-right: 1px solid #eee; border-bottom: 1px solid #eee; border-left: 1px solid #eee;">${trimmed.replace('[] ', '')}</section>`;
+                html += `<section style="background-color: #f9f9f9; border-top: 3.5px solid #8A1A24; padding: 22px; margin: 30px 0; font-size: 15px; color: #444; line-height: 1.9; border-right: 1px solid #eee; border-bottom: 1px solid #eee; border-left: 1px solid #eee; letter-spacing: 0.3px;">${trimmed.replace('[] ', '')}</section>`;
             } else if (trimmed.startsWith('![')) {
                 const altMatch = trimmed.match(/\[(.*?)\]/);
                 const urlMatch = trimmed.match(/\((.*?)\)/);
                 if (urlMatch) {
-                    const caption = altMatch && altMatch[1] ? `<section style="text-align: center; font-size: 12px; color: #999; margin-top: 8px;">${altMatch[1]}</section>` : "";
-                    html += `<section style="margin: 25px 0; text-align: center;"><img src="${urlMatch[1]}" style="max-width: 100%; display: block; margin: 0 auto; border-radius: 4px;">${caption}</section>`;
+                    const caption = altMatch && altMatch[1] ? `<section style="text-align: center; font-size: 12px; color: #999; margin-top: 10px; letter-spacing: 1px;">${altMatch[1]}</section>` : "";
+                    html += `<section style="margin: 30px 0;"><img src="${urlMatch[1]}" style="max-width: 100%; display: block; margin: 0 auto; border-radius: 4px;">${caption}</section>`;
                 }
-            } else if (trimmed === '---') {
-                html += `<section style="text-align: center; color: #B8860B; margin: 40px 0; font-size: 16px; letter-spacing: 10px;">······</section>`;
             } else {
-                html += `<p style="font-size: 16px; line-height: 1.8; color: #333; margin: 1.5em 0; text-align: justify;">${trimmed}</p>`;
+                html += `<p style="font-size: 16px; line-height: 2.1; color: #333; margin: 1.6em 0; text-align: justify; letter-spacing: 0.6px; font-family: 'Optima', serif;">${trimmed}</p>`;
             }
         });
 
-        // 核心修正：外层增加一个 section 包装，模拟公众号的正文容器
-        wrapper.innerHTML = `<section style="font-family: 'Optima', serif; max-width: 100%; box-sizing: border-box;">${header + html}</section>`;
+        wrapper.innerHTML = `<section style="max-width: 100%; box-sizing: border-box; overflow: hidden;">${header + html}</section>`;
     }
 
     editor.addEventListener('input', render);
     render();
 
     async function copyToWechat() {
-        const content = wrapper.innerHTML;
         const type = "text/html";
-        const blob = new Blob([content], { type });
+        const blob = new Blob([wrapper.innerHTML], { type });
         const data = [new ClipboardItem({ [type]: blob })];
-
         try {
             await navigator.clipboard.write(data);
             const btn = document.querySelector('.btn-copy');
-            btn.innerText = "✅ 已存至剪贴板";
-            btn.style.background = "#28a745";
-            setTimeout(() => { 
-                btn.innerText = "一键复制到公众号"; 
-                btn.style.background = "#8A1A24";
-            }, 2000);
-        } catch (err) {
-            console.error(err);
-            alert("复制失败。请尝试手动全选预览区内容并右键复制。");
-        }
+            btn.innerText = "✅ 复制成功";
+            setTimeout(() => { btn.innerText = "复制到公众号"; }, 2000);
+        } catch (err) { alert("复制失败"); }
     }
 </script>
 </body>
