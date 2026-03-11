@@ -60,6 +60,7 @@ height:calc(100vh - 60px);
 width:50%;
 padding:20px;
 background:white;
+position:relative;
 }
 
 textarea{
@@ -84,6 +85,28 @@ margin:auto;
 background:white;
 padding:35px;
 box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* syntax panel */
+
+.syntax{
+position:absolute;
+top:10px;
+left:10px;
+background:white;
+border:1px solid #eee;
+padding:10px;
+font-size:12px;
+line-height:1.6;
+width:170px;
+box-shadow:0 4px 10px rgba(0,0,0,0.05);
+}
+
+.syntax-title{
+font-weight:600;
+margin-bottom:6px;
+cursor:pointer;
+color:var(--red);
 }
 
 /* brand */
@@ -185,7 +208,7 @@ margin:20px 0;
 border-radius:4px;
 }
 
-/* info card */
+/* card */
 
 .card{
 background:#f6f6f6;
@@ -254,6 +277,35 @@ border-radius:6px;
 
 <div class="editor">
 
+<div class="syntax">
+
+<div class="syntax-title" onclick="toggleSyntax()">语法参考 ▼</div>
+
+<div id="syntaxBody">
+
+# 标题<br>
+@ 副标题<br>
+% 作者<br>
+$ 日期<br>
+<br>
+!! 导语<br>
+<br>
+## 一级标题<br>
+### 二级标题<br>
+<br>
+> 引用<br>
+>>> 重点引用<br>
+<br>
+[] 信息卡<br>
+![图片]<br>
+<br>
+--- 分隔<br>
+!!! 总结
+
+</div>
+
+</div>
+
 <textarea id="input">
 
 # 社区剧场观察
@@ -302,6 +354,7 @@ let part=1
 function render(){
 
 part=1
+
 let lines=input.value.split("\n")
 
 let html=`
@@ -366,6 +419,7 @@ html+=`
 </div>
 
 `
+
 }
 
 else if(line.startsWith("---"))
@@ -426,6 +480,18 @@ $ 日期
 `
 
 render()
+
+}
+
+function toggleSyntax(){
+
+let body=document.getElementById("syntaxBody")
+
+if(body.style.display==="none"){
+body.style.display="block"
+}else{
+body.style.display="none"
+}
 
 }
 
