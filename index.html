@@ -12,17 +12,28 @@
         .btn-copy { background: #8A1A24; color: white; border: none; padding: 9px 20px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px; transition: all 0.2s; }
         .btn-copy:hover { background: #6a141b; }
         .main-container { display: flex; flex: 1; overflow: hidden; }
-        .editor-container { flex: 1; padding: 25px; background: #fff; border-right: 1px solid #eee; display: flex; flex-direction: column; }
+        .editor-container { flex: 1; padding: 25px; background: #fff; border-right: 1px solid #eee; display: flex; flex-direction: column; position: relative; }
         textarea { flex: 1; width: 100%; border: none; outline: none; font-size: 14px; line-height: 1.7; color: #444; resize: none; font-family: 'Menlo', 'Monaco', 'Courier New', monospace; }
         .preview-container { flex: 1.2; padding: 40px; overflow-y: auto; background: #f0f0f2; display: flex; justify-content: center; }
         #article-wrapper { width: 100%; max-width: 500px; background: white; padding: 50px 35px; min-height: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.08); box-sizing: border-box; }
-        .syntax-tip { font-size: 11px; color: #999; margin-top: 15px; border-top: 1px solid #f0f0f0; padding-top: 10px; line-height: 1.6; }
+        
+        /* 完整语法提示区优化 */
+        .syntax-hint-box { 
+            background: #fafafa; 
+            padding: 15px; 
+            border-top: 1px solid #eee; 
+            font-size: 12px; 
+            color: #666; 
+            line-height: 1.8;
+        }
+        .syntax-hint-box b { color: #8A1A24; margin-right: 5px; }
+        .syntax-tag { display: inline-block; background: #f0f0f0; padding: 0 4px; border-radius: 3px; font-family: monospace; color: #333; margin-right: 4px; }
     </style>
 </head>
 <body>
 
 <div class="toolbar">
-    <div class="logo">POLUS Editor <span style="font-weight: 400; font-size: 12px; color: #999; margin-left: 5px;">v3.5 (Specialized)</span></div>
+    <div class="logo">POLUS Editor <span style="font-weight: 400; font-size: 12px; color: #999; margin-left: 5px;">v3.5 Professional</span></div>
     <button class="btn-copy" onclick="copyToWechat()">复制到公众号</button>
 </div>
 
@@ -51,10 +62,17 @@
 
 ---
 坚持做正确而非容易的事。</textarea>
-        <div class="syntax-tip">
-            <b>新增语法：</b><br>
-            <b>>> 金句高亮</b>：用于核心语录或结论（居中大字样式）<br>
-            <b>![图注内容](URL)</b>：图片下方会自动生成精美的图注说明
+        
+        <div class="syntax-hint-box">
+            <div style="margin-bottom: 5px; font-weight: bold; color: #333;">POLUS 语法手册：</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+                <div><b>标题层级</b></div><div><b>内容组件</b></div>
+                <div><span class="syntax-tag">#</span> 主标题</div><div><span class="syntax-tag">!!</span> 导语框 (深红边框)</div>
+                <div><span class="syntax-tag">@</span> 副标题 / 作者</div><div><span class="syntax-tag">[]</span> 信息卡片 (带顶边线)</div>
+                <div><span class="syntax-tag">##</span> 一级标题 (自动编号)</div><div><span class="syntax-tag">>></span> 金句高亮 (居中大引号)</div>
+                <div><span class="syntax-tag">###</span> 二级标题 (左侧线)</div><div><span class="syntax-tag">---</span> 分隔线 (◆ ◆ ◆)</div>
+                <div><span class="syntax-tag">![注](URL)</span> 图片与图注</div><div><span class="syntax-tag">回车</span> 普通正文段落</div>
+            </div>
         </div>
     </div>
 
@@ -82,40 +100,33 @@
             if (trimmed.startsWith('# ')) {
                 html += `<h1 style="font-size: 26px; color: #222; text-align: center; margin: 35px 0 12px; font-family: 'Noto Serif SC', serif;">${trimmed.replace('# ', '')}</h1>`;
             } else if (trimmed.startsWith('@ ')) {
-                html += `<div style="font-size: 13px; color: #888; text-align: center; margin-bottom: 35px;">${trimmed.replace('@ ', '')}</div>`;
+                html += `<div style="font-size: 13px; color: #888; text-align: center; margin-bottom: 35px; letter-spacing: 1px;">${trimmed.replace('@ ', '')}</div>`;
             } else if (trimmed.startsWith('!! ')) {
                 html += `<div style="background: #fdf5f6; border-left: 4px solid #8A1A24; padding: 22px; margin: 28px 0; color: #8A1A24; line-height: 1.8; font-size: 15px; text-align: justify;">${trimmed.replace('!! ', '')}</div>`;
             } 
-            // 金句高亮 (>>) - 新增
             else if (trimmed.startsWith('>> ')) {
-                html += `
-                    <div style="text-align: center; margin: 40px 0; padding: 0 20px;">
-                        <div style="color: #B8860B; font-size: 24px; font-family: serif; margin-bottom: -15px; opacity: 0.5;">“</div>
-                        <div style="font-size: 18px; color: #8A1A24; font-family: 'Noto Serif SC', serif; font-weight: bold; line-height: 1.6; padding: 0 10px;">${trimmed.replace('>> ', '')}</div>
-                        <div style="color: #B8860B; font-size: 24px; font-family: serif; margin-top: -5px; opacity: 0.5;">”</div>
-                    </div>`;
+                html += `<div style="text-align: center; margin: 40px 0; padding: 0 20px;"><div style="color: #B8860B; font-size: 24px; font-family: serif; margin-bottom: -15px; opacity: 0.5;">“</div><div style="font-size: 18px; color: #8A1A24; font-family: 'Noto Serif SC', serif; font-weight: bold; line-height: 1.6;">${trimmed.replace('>> ', '')}</div><div style="color: #B8860B; font-size: 24px; font-family: serif; margin-top: -5px; opacity: 0.5;">”</div></div>`;
             }
             else if (trimmed.startsWith('## ')) {
                 sectionCount++;
                 const num = sectionCount < 10 ? '0' + sectionCount : sectionCount;
-                html += `<div style="margin: 50px 0 25px; padding-bottom: 10px; border-bottom: 1px solid #f0f0f0;"><div style="font-size: 11px; color: #8A1A24; font-weight: bold; letter-spacing: 2px; opacity: 0.7; margin-bottom: 8px;">CHAPTER ${num}</div><div style="width: 40px; height: 3.5px; background: #B8860B; margin-bottom: 12px;"></div><h2 style="font-size: 23px; color: #222; margin: 0; font-family: 'Noto Serif SC', serif;">${trimmed.replace('## ', '')}</h2></div>`;
+                html += `<div style="margin: 50px 0 25px; padding-bottom: 10px; border-bottom: 1px solid #f0f0f0;"><div style="font-size: 11px; color: #8A1A24; font-weight: bold; letter-spacing: 2px; opacity: 0.7; margin-bottom: 8px;">CHAPTER ${num}</div><div style="width: 40px; height: 3.5px; background: #B8860B; margin-bottom: 12px;"></div><h2 style="font-size: 23px; color: #222; margin: 0; font-family: 'Noto Serif SC', serif; font-weight: 700;">${trimmed.replace('## ', '')}</h2></div>`;
             } else if (trimmed.startsWith('### ')) {
-                html += `<div style="margin: 35px 0 18px; padding-left: 14px; border-left: 3px solid #8A1A24;"><h3 style="font-size: 18px; color: #8A1A24; margin: 0; font-family: 'Noto Serif SC', serif; letter-spacing: 0.5px;">${trimmed.replace('### ', '')}</h3></div>`;
+                html += `<div style="margin: 35px 0 18px; padding-left: 14px; border-left: 3px solid #8A1A24;"><h3 style="font-size: 18px; color: #8A1A24; margin: 0; font-family: 'Noto Serif SC', serif; letter-spacing: 0.5px; font-weight: 700;">${trimmed.replace('### ', '')}</h3></div>`;
             } else if (trimmed.startsWith('[] ')) {
-                html += `<div style="background: #f9f9f9; border: 1px solid #eee; border-top: 3.5px solid #8A1A24; padding: 20px; margin: 30px 0; font-size: 15px; color: #444; line-height: 1.8;">${trimmed.replace('[] ', '')}</div>`;
+                html += `<div style="background: #f9f9f9; border: 1px solid #eee; border-top: 3.5px solid #8A1A24; padding: 20px; margin: 30px 0; font-size: 15px; color: #444; line-height: 1.8; text-align: justify;">${trimmed.replace('[] ', '')}</div>`;
             } 
-            // 图片与图注解析 - 增强版
             else if (trimmed.startsWith('![')) {
                 const altMatch = trimmed.match(/\[(.*?)\]/);
                 const urlMatch = trimmed.match(/\((.*?)\)/);
                 if (urlMatch) {
-                    const caption = altMatch && altMatch[1] ? `<div style="text-align: center; font-size: 12px; color: #999; margin-top: 10px; padding: 0 20px; line-height: 1.5; letter-spacing: 0.5px;">${altMatch[1]}</div>` : "";
+                    const caption = altMatch && altMatch[1] ? `<div style="text-align: center; font-size: 12px; color: #999; margin-top: 10px; padding: 0 20px;">${altMatch[1]}</div>` : "";
                     html += `<div style="margin: 30px 0;"><img src="${urlMatch[1]}" style="width: 100%; display: block; border-radius: 3px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">${caption}</div>`;
                 }
             } else if (trimmed === '---') {
                 html += `<div style="text-align: center; color: #B8860B; margin: 45px 0; font-size: 18px; letter-spacing: 8px;">······</div>`;
             } else {
-                html += `<p style="font-size: 16px; line-height: 2.1; color: #333; margin: 1.6em 0; text-align: justify; font-family: 'Optima', 'Noto Serif SC', serif;">${trimmed}</p>`;
+                html += `<p style="font-size: 16px; line-height: 2.1; color: #333; margin: 1.6em 0; text-align: justify; font-family: 'Optima', 'Noto Serif SC', serif; letter-spacing: 0.3px;">${trimmed}</p>`;
             }
         });
         wrapper.innerHTML = header + html;
