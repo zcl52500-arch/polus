@@ -1,499 +1,437 @@
 <!DOCTYPE html>
 <html lang="zh">
-
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>POLUS Writer</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<title>POLUS Editor</title>
 
 <style>
 
-:root{
---red:#8A1A24;
---gold:#C6A65B;
-}
-
 body{
 margin:0;
-font-family:Inter;
-background:#f2f2f2;
+font-family:"Noto Serif SC",serif;
+background:#f4f4f4;
 }
-
-/* header */
-
-.header{
-background:white;
-padding:14px 24px;
-display:flex;
-justify-content:space-between;
-border-bottom:1px solid #eee;
-}
-
-.logo{
-font-family:"Noto Serif SC";
-color:var(--red);
-letter-spacing:2px;
-}
-
-button{
-background:var(--red);
-color:white;
-border:none;
-padding:7px 12px;
-margin-left:8px;
-border-radius:4px;
-cursor:pointer;
-}
-
-/* layout */
 
 .container{
 display:flex;
-height:calc(100vh - 60px);
+height:100vh;
 }
 
-.editor{
-width:50%;
-padding:20px;
-background:white;
-position:relative;
-}
+/* 语法侧栏 */
 
-textarea{
-width:100%;
-height:100%;
-border:none;
-resize:none;
-outline:none;
-font-size:15px;
-line-height:1.8;
-}
+.syntax-panel{
 
-.preview{
-width:50%;
-padding:30px;
+width:180px;
+background:#fafafa;
+border-right:1px solid #eee;
+padding:15px;
+font-size:13px;
+line-height:1.7;
 overflow:auto;
-}
 
-.wechat{
-max-width:420px;
-margin:auto;
-background:white;
-padding:35px;
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
-}
-
-/* syntax panel */
-
-.syntax{
-position:absolute;
-top:10px;
-left:10px;
-background:white;
-border:1px solid #eee;
-padding:10px;
-font-size:12px;
-line-height:1.6;
-width:170px;
-box-shadow:0 4px 10px rgba(0,0,0,0.05);
 }
 
 .syntax-title{
-font-weight:600;
-margin-bottom:6px;
-cursor:pointer;
-color:var(--red);
+
+font-weight:700;
+color:#8A1A24;
+margin-bottom:10px;
+
 }
 
-/* brand */
+/* 编辑区 */
 
-.brand{
+.editor{
+
+width:40%;
+padding:20px;
+background:#ffffff;
+
+}
+
+textarea{
+
+width:100%;
+height:100%;
+border:none;
+outline:none;
+font-size:16px;
+line-height:1.8;
+font-family:"Noto Serif SC",serif;
+
+}
+
+/* 预览区 */
+
+.preview{
+
+width:40%;
+padding:25px;
+overflow:auto;
+background:#f4f4f4;
+
+}
+
+/* 文章 */
+
+.article{
+
+max-width:680px;
+margin:auto;
+background:white;
+padding:30px;
+box-shadow:0 4px 12px rgba(0,0,0,0.05);
+
+}
+
+/* POLUS header */
+
+.polus-header{
+
 text-align:center;
-margin-bottom:25px;
+margin-bottom:30px;
+
 }
 
-.brand h1{
-margin:0;
-font-family:"Noto Serif SC";
-color:var(--red);
-}
+.polus-logo{
 
-.brand small{
-color:#777;
-}
-
-/* title */
-
-.title{
 font-size:30px;
-font-family:"Noto Serif SC";
-margin-top:20px;
+font-weight:700;
+letter-spacing:2px;
+color:#8A1A24;
+
 }
+
+.polus-sub{
+
+font-size:12px;
+color:#666;
+
+}
+
+/* 主标题 */
+
+h1{
+
+font-size:28px;
+margin-bottom:10px;
+
+}
+
+/* 副标题 */
 
 .subtitle{
-color:#666;
-margin:6px 0;
+
+color:#777;
+font-size:14px;
+margin-bottom:25px;
+
 }
 
-.meta{
-font-size:13px;
-color:#999;
-}
-
-/* intro */
-
-.intro{
-background:#f7f7f7;
-border-left:4px solid var(--red);
-padding:12px;
-margin:20px 0;
-}
-
-/* section */
+/* 一级标题 */
 
 .section{
-margin-top:35px;
+
+margin-top:40px;
+
 }
 
-.section-label{
+.section-tag{
+
 font-size:12px;
-letter-spacing:2px;
-color:var(--red);
+letter-spacing:1px;
+color:#8A1A24;
+font-weight:700;
+
+}
+
+.section-line{
+
+width:40px;
+height:3px;
+background:#B8860B;
+margin:6px 0 10px;
+
 }
 
 .section-title{
+
 font-size:22px;
-font-family:"Noto Serif SC";
-margin-top:5px;
+font-weight:700;
+
 }
 
-/* h3 */
+/* 二级标题 */
 
-.h3{
-margin-top:20px;
-font-weight:600;
+h3{
+
+margin-top:25px;
+font-size:18px;
+color:#8A1A24;
+
 }
 
-.h3::before{
-content:"✦ ";
-color:var(--red);
-}
-
-/* text */
+/* 正文 */
 
 p{
-line-height:1.8;
-margin:15px 0;
+
+font-size:16px;
+line-height:1.9;
+text-align:justify;
+margin:12px 0;
+
 }
 
-/* quote */
+/* 导语 */
 
-blockquote{
-border-left:3px solid var(--gold);
-padding-left:10px;
-color:#555;
-}
+.intro{
 
-/* strong quote */
-
-.strongquote{
-background:var(--red);
-color:white;
-padding:15px;
+border-left:5px solid #8A1A24;
+background:#fdf5f6;
+padding:12px 16px;
 margin:20px 0;
-border-radius:4px;
+
 }
 
-/* card */
+/* 引用 */
+
+.quote{
+
+border-left:4px solid #B8860B;
+padding-left:12px;
+color:#666;
+margin:20px 0;
+
+}
+
+/* 信息卡 */
 
 .card{
-background:#f6f6f6;
-padding:12px;
-border-left:4px solid var(--red);
-margin:18px 0;
+
+background:#fafafa;
+border:1px solid #eee;
+padding:15px;
+margin:20px 0;
+
 }
 
-/* image */
-
-.image{
-margin:25px 0;
-text-align:center;
-}
-
-.image img{
-width:100%;
-border-radius:8px;
-}
-
-.caption{
-font-size:13px;
-color:#888;
-margin-top:6px;
-}
-
-/* divider */
+/* 分隔 */
 
 .divider{
+
 text-align:center;
-margin:30px 0;
-color:var(--gold);
+margin:35px 0;
+color:#B8860B;
+
 }
 
-/* summary */
+/* 图片 */
 
-.summary{
-background:var(--red);
-color:white;
-padding:20px;
-margin:30px 0;
-border-radius:6px;
+img{
+
+max-width:100%;
+border-radius:4px;
+margin:20px 0;
+
 }
 
 </style>
-
 </head>
 
 <body>
 
-<div class="header">
-
-<div class="logo">POLUS Writer</div>
-
-<div>
-
-<button onclick="insertTemplate()">模板</button>
-<button onclick="copyHTML()">复制HTML</button>
-<button onclick="clearText()">清空</button>
-
-</div>
-
-</div>
-
 <div class="container">
 
-<div class="editor">
+<!-- 语法参考 -->
 
-<div class="syntax">
+<div class="syntax-panel">
 
-<div class="syntax-title" onclick="toggleSyntax()">语法参考 ▼</div>
+<div class="syntax-title">语法参考</div>
 
-<div id="syntaxBody">
-
-# 标题<br>
+# 主标题<br>
 @ 副标题<br>
-% 作者<br>
-$ 日期<br>
 <br>
+
 !! 导语<br>
 <br>
+
 ## 一级标题<br>
 ### 二级标题<br>
 <br>
+
 > 引用<br>
->>> 重点引用<br>
-<br>
 [] 信息卡<br>
-![图片]<br>
 <br>
---- 分隔<br>
-!!! 总结
+
+![图片URL]<br>
+<br>
+
+--- 分隔
 
 </div>
 
-</div>
+<!-- 编辑区 -->
 
-<textarea id="input">
+<div class="editor">
 
-# 社区剧场观察
-@ 教育与公共空间
-% POLUS Editorial
-$ 2025
+<textarea id="editor">
 
-!! 社区剧场不仅是艺术空间，它也是公共教育的一种形式。
+# 标题写在这里
 
-## 社区剧场的参与者
+@ 副标题 / 作者 / 日期
 
-### 谁在参与
+!! 这里是文章导语
 
-社区剧场往往由普通人组成。
+## 第一部分标题
 
-> 剧场属于社区。
+正文段落。
 
->>> 戏剧可以成为公共教育。
+### 二级小标题
 
-[] 时间：2025  
-[] 地点：深圳  
+正文内容。
 
-![戏剧排练]
+> 这是引用
+
+[] 这是信息卡内容
 
 ---
 
-!!! 社区剧场正在成为新的公共学习空间。
+## 第二部分
+
+继续写内容。
 
 </textarea>
 
 </div>
 
+<!-- 预览区 -->
+
 <div class="preview">
-<div class="wechat" id="preview"></div>
+
+<div class="article" id="preview"></div>
+
 </div>
 
 </div>
 
 <script>
 
-const input=document.getElementById("input")
-const preview=document.getElementById("preview")
-
-let part=1
+const editor=document.getElementById("editor");
+const preview=document.getElementById("preview");
 
 function render(){
 
-part=1
+let text=editor.value;
 
-let lines=input.value.split("\n")
+let lines=text.split("\n");
 
-let html=`
-
-<div class="brand">
-<h1>POLUS</h1>
-<small>Educational Foundation</small>
-</div>
-
-`
+let html="";
 
 lines.forEach(line=>{
 
-if(line.startsWith("# "))
-html+=`<div class="title">${line.slice(2)}</div>`
+if(line.startsWith("# ")){
 
-else if(line.startsWith("@ "))
-html+=`<div class="subtitle">${line.slice(2)}</div>`
+html+=`<h1>${line.replace("# ","")}</h1>`;
 
-else if(line.startsWith("% "))
-html+=`<div class="meta">作者：${line.slice(2)}</div>`
+}
 
-else if(line.startsWith("$ "))
-html+=`<div class="meta">日期：${line.slice(2)}</div>`
+else if(line.startsWith("@ ")){
 
-else if(line.startsWith("!! "))
-html+=`<div class="intro">${line.slice(3)}</div>`
+html+=`<div class="subtitle">${line.replace("@ ","")}</div>`;
+
+}
+
+else if(line.startsWith("!! ")){
+
+html+=`<div class="intro">${line.replace("!! ","")}</div>`;
+
+}
 
 else if(line.startsWith("## ")){
+
 html+=`
 
 <div class="section">
-<div class="section-label">PART ${part}</div>
-<div class="section-title">${line.slice(3)}</div>
+
+<div class="section-tag">POLUS INSIGHT</div>
+
+<div class="section-line"></div>
+
+<div class="section-title">
+
+${line.replace("## ","")}
+
 </div>
 
-`
-part++
+</div>
+
+`;
+
 }
 
-else if(line.startsWith("### "))
-html+=`<div class="h3">${line.slice(4)}</div>`
+else if(line.startsWith("### ")){
 
-else if(line.startsWith("> "))
-html+=`<blockquote>${line.slice(2)}</blockquote>`
+html+=`<h3>${line.replace("### ","")}</h3>`;
 
-else if(line.startsWith(">>> "))
-html+=`<div class="strongquote">${line.slice(4)}</div>`
+}
 
-else if(line.startsWith("[] "))
-html+=`<div class="card">${line.slice(3)}</div>`
+else if(line.startsWith("> ")){
+
+html+=`<div class="quote">${line.replace("> ","")}</div>`;
+
+}
+
+else if(line.startsWith("[] ")){
+
+html+=`<div class="card">${line.replace("[] ","")}</div>`;
+
+}
 
 else if(line.startsWith("![")){
 
-let caption=line.substring(2,line.length-1)
+let url=line.match(/\((.*?)\)/);
 
-html+=`
+if(url){
 
-<div class="image">
-<img src="https://picsum.photos/600/400">
-<div class="caption">${caption}</div>
+html+=`<img src="${url[1]}">`;
+
+}
+
+}
+
+else if(line==="---"){
+
+html+=`<div class="divider">◆</div>`;
+
+}
+
+else{
+
+html+=`<p>${line}</p>`;
+
+}
+
+});
+
+preview.innerHTML=`
+
+<div class="polus-header">
+
+<div class="polus-logo">POLUS</div>
+
+<div class="polus-sub">Educational Foundation</div>
+
 </div>
 
-`
+${html}
+
+`;
 
 }
 
-else if(line.startsWith("---"))
-html+=`<div class="divider">◆</div>`
+editor.addEventListener("input",render);
 
-else if(line.startsWith("!!! "))
-html+=`<div class="summary">${line.slice(4)}</div>`
-
-else if(line.trim()!="")
-html+=`<p>${line}</p>`
-
-})
-
-preview.innerHTML=html
-
-}
-
-input.addEventListener("input",render)
-
-render()
-
-function copyHTML(){
-navigator.clipboard.writeText(preview.innerHTML)
-alert("公众号HTML已复制")
-}
-
-function clearText(){
-input.value=""
-render()
-}
-
-function insertTemplate(){
-
-input.value=`# 标题
-@ 副标题
-% 作者
-$ 日期
-
-!! 导语
-
-## 第一部分
-
-### 小标题
-
-正文
-
-> 引用
-
->>> 重点观点
-
-[] 信息卡
-
-![图片说明]
-
----
-
-!!! 总结
-`
-
-render()
-
-}
-
-function toggleSyntax(){
-
-let body=document.getElementById("syntaxBody")
-
-if(body.style.display==="none"){
-body.style.display="block"
-}else{
-body.style.display="none"
-}
-
-}
+render();
 
 </script>
 
