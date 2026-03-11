@@ -1,440 +1,256 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<meta charset="UTF-8">
-<title>POLUS Editor</title>
-
-<style>
-
-body{
-margin:0;
-font-family:"Noto Serif SC",serif;
-background:#f4f4f4;
-}
-
-.container{
-display:flex;
-height:100vh;
-}
-
-/* 语法侧栏 */
-
-.syntax-panel{
-
-width:180px;
-background:#fafafa;
-border-right:1px solid #eee;
-padding:15px;
-font-size:13px;
-line-height:1.7;
-overflow:auto;
-
-}
-
-.syntax-title{
-
-font-weight:700;
-color:#8A1A24;
-margin-bottom:10px;
-
-}
-
-/* 编辑区 */
-
-.editor{
-
-width:40%;
-padding:20px;
-background:#ffffff;
-
-}
-
-textarea{
-
-width:100%;
-height:100%;
-border:none;
-outline:none;
-font-size:16px;
-line-height:1.8;
-font-family:"Noto Serif SC",serif;
-
-}
-
-/* 预览区 */
-
-.preview{
-
-width:40%;
-padding:25px;
-overflow:auto;
-background:#f4f4f4;
-
-}
-
-/* 文章 */
-
-.article{
-
-max-width:680px;
-margin:auto;
-background:white;
-padding:30px;
-box-shadow:0 4px 12px rgba(0,0,0,0.05);
-
-}
-
-/* POLUS header */
-
-.polus-header{
-
-text-align:center;
-margin-bottom:30px;
-
-}
-
-.polus-logo{
-
-font-size:30px;
-font-weight:700;
-letter-spacing:2px;
-color:#8A1A24;
-
-}
-
-.polus-sub{
-
-font-size:12px;
-color:#666;
-
-}
-
-/* 主标题 */
-
-h1{
-
-font-size:28px;
-margin-bottom:10px;
-
-}
-
-/* 副标题 */
-
-.subtitle{
-
-color:#777;
-font-size:14px;
-margin-bottom:25px;
-
-}
-
-/* 一级标题 */
-
-.section{
-
-margin-top:40px;
-
-}
-
-.section-tag{
-
-font-size:12px;
-letter-spacing:1px;
-color:#8A1A24;
-font-weight:700;
-
-}
-
-.section-line{
-
-width:40px;
-height:3px;
-background:#B8860B;
-margin:6px 0 10px;
-
-}
-
-.section-title{
-
-font-size:22px;
-font-weight:700;
-
-}
-
-/* 二级标题 */
-
-h3{
-
-margin-top:25px;
-font-size:18px;
-color:#8A1A24;
-
-}
-
-/* 正文 */
-
-p{
-
-font-size:16px;
-line-height:1.9;
-text-align:justify;
-margin:12px 0;
-
-}
-
-/* 导语 */
-
-.intro{
-
-border-left:5px solid #8A1A24;
-background:#fdf5f6;
-padding:12px 16px;
-margin:20px 0;
-
-}
-
-/* 引用 */
-
-.quote{
-
-border-left:4px solid #B8860B;
-padding-left:12px;
-color:#666;
-margin:20px 0;
-
-}
-
-/* 信息卡 */
-
-.card{
-
-background:#fafafa;
-border:1px solid #eee;
-padding:15px;
-margin:20px 0;
-
-}
-
-/* 分隔 */
-
-.divider{
-
-text-align:center;
-margin:35px 0;
-color:#B8860B;
-
-}
-
-/* 图片 */
-
-img{
-
-max-width:100%;
-border-radius:4px;
-margin:20px 0;
-
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POLUS 内容编辑器</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f0f0f2;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* 顶部工具栏 */
+        .toolbar {
+            background: #ffffff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 700;
+            color: #8A1A24;
+            letter-spacing: 1px;
+        }
+
+        .btn-copy {
+            background: #8A1A24;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .btn-copy:hover {
+            background: #a3202b;
+        }
+
+        /* 主体容器 */
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* 编辑区 */
+        .editor-container {
+            flex: 1;
+            padding: 20px;
+            background: #fff;
+            border-right: 1px solid #eee;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #333;
+            resize: none;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* 预览区 */
+        .preview-container {
+            flex: 1;
+            padding: 40px 20px;
+            overflow-y: auto;
+            background: #f4f4f4;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* 模拟微信公众号宽度 */
+        #article-wrapper {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            padding: 40px 30px;
+            min-height: 100%;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            box-sizing: border-box;
+        }
+
+        /* 语法提示面板 */
+        .syntax-hint {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            border: 1px solid #ddd;
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="container">
-
-<!-- 语法参考 -->
-
-<div class="syntax-panel">
-
-<div class="syntax-title">语法参考</div>
-
-# 主标题<br>
-@ 副标题<br>
-<br>
-
-!! 导语<br>
-<br>
-
-## 一级标题<br>
-### 二级标题<br>
-<br>
-
-> 引用<br>
-[] 信息卡<br>
-<br>
-
-![图片URL]<br>
-<br>
-
---- 分隔
-
+<div class="toolbar">
+    <div class="logo">POLUS EDITOR</div>
+    <button class="btn-copy" onclick="copyToWechat()">复制到公众号</button>
 </div>
 
-<!-- 编辑区 -->
+<div class="main-container">
+    <div class="editor-container">
+<textarea id="editor" placeholder="在此输入内容...">
+# 赋能教育新未来
+@ POLUS 执行团队 / 2026年3月
 
-<div class="editor">
+!! 这是一个基于 POLUS 视觉规范的在线编辑器。支持自动章节编号、高档衬线体排版，以及针对微信公众号后台的一键样式克隆。
 
-<textarea id="editor">
+## 核心愿景
+POLUS 致力于通过创新的教育模式，为每一个孩子提供公平且高质量的学习机会。我们的项目涵盖了从乡村教育支持到城市素质教育拓展的全方位服务。
 
-# 标题写在这里
+[] 重点项目：2026年“星火计划”已正式启动，预计覆盖全国15个省份。
 
-@ 副标题 / 作者 / 日期
+## 协作与创新
+![POLUS活动](https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80)
+排版中不仅注重文字的传递，更注重视觉的留白与节奏。
 
-!! 这里是文章导语
+## 总结感言
+坚持以人为本，用科技与温情重塑学习的边界。</textarea>
+    </div>
 
-## 第一部分标题
-
-正文段落。
-
-### 二级小标题
-
-正文内容。
-
-> 这是引用
-
-[] 这是信息卡内容
-
----
-
-## 第二部分
-
-继续写内容。
-
-</textarea>
-
+    <div class="preview-container">
+        <div id="article-wrapper">
+            </div>
+    </div>
 </div>
 
-<!-- 预览区 -->
-
-<div class="preview">
-
-<div class="article" id="preview"></div>
-
-</div>
-
+<div class="syntax-hint">
+    <b>语法：</b><br>
+    # 主标题 | @ 副标题 | !! 导语<br>
+    ## 章节标题 | [] 卡片 | ![描述](URL) 图片
 </div>
 
 <script>
+    const editor = document.getElementById('editor');
+    const wrapper = document.getElementById('article-wrapper');
 
-const editor=document.getElementById("editor");
-const preview=document.getElementById("preview");
+    function render() {
+        const text = editor.value;
+        const lines = text.split('\n');
+        let html = '';
+        let sectionCount = 0;
 
-function render(){
+        // 品牌头部
+        const header = `
+            <div style="text-align: center; margin-bottom: 50px;">
+                <div style="font-size: 32px; font-weight: bold; color: #8A1A24; letter-spacing: 6px; font-family: 'Optima', serif;">POLUS</div>
+                <div style="font-size: 10px; color: #B8860B; letter-spacing: 2px; margin-top: 5px; font-weight: bold;">EDUCATIONAL FOUNDATION</div>
+                <div style="width: 20px; height: 1px; background: #8A1A24; margin: 15px auto;"></div>
+            </div>
+        `;
 
-let text=editor.value;
+        lines.forEach(line => {
+            const trimmed = line.trim();
+            if (!trimmed) return;
 
-let lines=text.split("\n");
+            // 主标题
+            if (trimmed.startsWith('# ')) {
+                html += `<h1 style="font-size: 26px; color: #222; text-align: center; margin: 30px 0 10px; font-family: 'Noto Serif SC', serif;">${trimmed.replace('# ', '')}</h1>`;
+            }
+            // 副标题
+            else if (trimmed.startsWith('@ ')) {
+                html += `<div style="font-size: 13px; color: #888; text-align: center; margin-bottom: 30px; letter-spacing: 1px;">${trimmed.replace('@ ', '')}</div>`;
+            }
+            // 导语
+            else if (trimmed.startsWith('!! ')) {
+                html += `<div style="background: #fdf5f6; border-left: 4px solid #8A1A24; padding: 20px; margin: 25px 0; color: #8A1A24; line-height: 1.8; font-size: 15px; font-weight: 500;">${trimmed.replace('!! ', '')}</div>`;
+            }
+            // 章节标题 (带自动编号)
+            else if (trimmed.startsWith('## ')) {
+                sectionCount++;
+                const num = sectionCount < 10 ? '0' + sectionCount : sectionCount;
+                html += `
+                    <div style="margin: 45px 0 25px;">
+                        <div style="font-size: 12px; color: #8A1A24; font-weight: bold; letter-spacing: 2px; opacity: 0.7;">POLUS SECTION ${num}</div>
+                        <div style="width: 35px; height: 3px; background: #B8860B; margin: 10px 0;"></div>
+                        <h2 style="font-size: 22px; color: #222; margin: 0; font-family: 'Noto Serif SC', serif;">${trimmed.replace('## ', '')}</h2>
+                    </div>`;
+            }
+            // 引用卡片
+            else if (trimmed.startsWith('[] ')) {
+                html += `<div style="background: #f9f9f9; border: 1px solid #eee; border-top: 3px solid #8A1A24; padding: 20px; margin: 25px 0; font-size: 15px; color: #444; line-height: 1.8; text-align: justify;">${trimmed.replace('[] ', '')}</div>`;
+            }
+            // 图片
+            else if (trimmed.startsWith('![')) {
+                const urlMatch = trimmed.match(/\((.*?)\)/);
+                if (urlMatch) {
+                    html += `<img src="${urlMatch[1]}" style="width: 100%; display: block; border-radius: 2px; margin: 25px 0;">`;
+                }
+            }
+            // 分隔线
+            else if (trimmed === '---') {
+                html += `<div style="text-align: center; color: #B8860B; margin: 40px 0;">◆ ◆ ◆</div>`;
+            }
+            // 普通段落
+            else {
+                html += `<p style="font-size: 16px; line-height: 1.9; color: #333; margin: 1.5em 0; text-align: justify; font-family: 'Optima', 'Noto Serif SC', serif;">${trimmed}</p>`;
+            }
+        });
 
-let html="";
+        wrapper.innerHTML = header + html;
+    }
 
-lines.forEach(line=>{
+    // 监听输入
+    editor.addEventListener('input', render);
 
-if(line.startsWith("# ")){
+    // 初始渲染
+    render();
 
-html+=`<h1>${line.replace("# ","")}</h1>`;
+    // 复制富文本功能
+    async function copyToWechat() {
+        const type = "text/html";
+        // 关键点：获取渲染后的 HTML，并包裹在特定的 div 中以确保样式携带
+        const blob = new Blob([wrapper.outerHTML], { type });
+        const data = [new ClipboardItem({ [type]: blob })];
 
-}
-
-else if(line.startsWith("@ ")){
-
-html+=`<div class="subtitle">${line.replace("@ ","")}</div>`;
-
-}
-
-else if(line.startsWith("!! ")){
-
-html+=`<div class="intro">${line.replace("!! ","")}</div>`;
-
-}
-
-else if(line.startsWith("## ")){
-
-html+=`
-
-<div class="section">
-
-<div class="section-tag">POLUS INSIGHT</div>
-
-<div class="section-line"></div>
-
-<div class="section-title">
-
-${line.replace("## ","")}
-
-</div>
-
-</div>
-
-`;
-
-}
-
-else if(line.startsWith("### ")){
-
-html+=`<h3>${line.replace("### ","")}</h3>`;
-
-}
-
-else if(line.startsWith("> ")){
-
-html+=`<div class="quote">${line.replace("> ","")}</div>`;
-
-}
-
-else if(line.startsWith("[] ")){
-
-html+=`<div class="card">${line.replace("[] ","")}</div>`;
-
-}
-
-else if(line.startsWith("![")){
-
-let url=line.match(/\((.*?)\)/);
-
-if(url){
-
-html+=`<img src="${url[1]}">`;
-
-}
-
-}
-
-else if(line==="---"){
-
-html+=`<div class="divider">◆</div>`;
-
-}
-
-else{
-
-html+=`<p>${line}</p>`;
-
-}
-
-});
-
-preview.innerHTML=`
-
-<div class="polus-header">
-
-<div class="polus-logo">POLUS</div>
-
-<div class="polus-sub">Educational Foundation</div>
-
-</div>
-
-${html}
-
-`;
-
-}
-
-editor.addEventListener("input",render);
-
-render();
-
+        try {
+            await navigator.clipboard.write(data);
+            const btn = document.querySelector('.btn-copy');
+            const originalText = btn.innerText;
+            btn.innerText = "✅ 复制成功！";
+            btn.style.background = "#28a745";
+            
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.background = "#8A1A24";
+            }, 2000);
+        } catch (err) {
+            alert("复制失败，请尝试手动全选预览区并复制。");
+        }
+    }
 </script>
 
 </body>
-
 </html>
